@@ -129,9 +129,7 @@ export default function Form(props) {
         </Styled_Label>
         <Validation_Text>(validation text)</Validation_Text>
         {/* ------------------------------------------ */}
-        <button name="submit_button" id="order-button">
-          Submit
-        </button>
+        <button name="submit_button" id="order-button">Submit</button>
       </form>
     </>
   );
