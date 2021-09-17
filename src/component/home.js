@@ -9,7 +9,7 @@ const Img_Div = styled.div`
   padding-left: 40%;
   padding-top: 30%;
   background-image: url("https://picsum.photos/500");
-  height: 10vh;
+  height: 50%;
   width: %100;
 `;
 
