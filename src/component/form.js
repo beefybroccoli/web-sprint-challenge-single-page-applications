@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from "react";
-import NavigationBar from "./navigationbar";
 import styled from "styled-components";
 import * as con from "./constant";
 import axios from "axios";
