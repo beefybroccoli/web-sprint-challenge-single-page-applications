@@ -1,17 +1,18 @@
-import react from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const Div_Nav = styled.div`
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  /* flex-wrap: nowrap; */
+  align-content: space-between;
 `;
 export default function NavigationBar(props) {
   return (
-    <div>
+    <Div_Nav>
       <NavLink to="/">Home</NavLink>
       <NavLink to="/pizza">pizza</NavLink>
-    </div>
+    </Div_Nav>
   );
 }

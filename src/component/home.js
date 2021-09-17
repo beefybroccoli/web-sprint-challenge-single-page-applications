@@ -6,23 +6,47 @@ import Slide from "./slide";
 import ListOfSlide from "./listofslide";
 import * as con from "./constant";
 const Img_Div = styled.div`
+  padding-left: 40%;
+  padding-top: 30%;
   background-image: url("https://picsum.photos/500");
-  height: 40vh;
+  height: 10vh;
   width: %100;
 `;
+
+const Link_Div = styled.div`
+  background-color: gray;
+  font-size: 3em;
+  width: 35%;
+  align-items: center;
+  text-align: center;
+`;
+
+const Title_H2 = styled.h2`
+  width: 70%;
+`;
+
+const Header_DIV = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 export default function Home(props) {
   return (
     <div>
       <div>
         <header>
-          <h2>LAMBDA EATS</h2>
-          <NavigationBar />
+          <Header_DIV>
+            <Title_H2>LAMBDA EATS</Title_H2>
+            <NavigationBar />
+          </Header_DIV>
         </header>
 
         <Img_Div>
-          <NavLink to="/pizza" id="order-pizza">
-            Order Pizza
-          </NavLink>
+          <Link_Div>
+            <NavLink to="/pizza" id="order-pizza">
+              Pizza?
+            </NavLink>
+          </Link_Div>
         </Img_Div>
       </div>
       <br />
