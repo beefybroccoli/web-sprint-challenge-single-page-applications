@@ -7,3 +7,5 @@ export const initial_form_state = {
   topping_chili: false,
   special_instruction: "",
 };
+
+export const API_URL = "https://reqres.in/api/orders";

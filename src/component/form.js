@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import NavigationBar from "./navigationbar";
 import styled from "styled-components";
 import * as con from "./constant";
+import axios from "axios";
 
 const Styled_Label = styled.label`
   border: 1px solid black;
@@ -15,7 +16,7 @@ export default function Form(props) {
   const [stateForm, set_stateForm] = useState(con.initial_form_state);
 
   const cb_onChange = (event) => {
-    console.log(event);
+    // console.log(event);
     // console.log("event.target.name = ", event.target.name);
     // console.log("event.target.value = ", event.target.value);
     // console.log("event.target.type = ", event.target.type);
@@ -26,6 +27,13 @@ export default function Form(props) {
 
   const cb_onSubmit = (event) => {
     event.preventDefault();
+
+    axios.post(con.API_URL, stateForm).then((response) => {
+      console.log("form.js - response = ", response);
+    });
+
+    //reset stateForm to default
+    set_stateForm(con.initial_form_state);
   };
 
   return (
