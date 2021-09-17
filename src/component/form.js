@@ -4,6 +4,10 @@ import NavigationBar from "./navigationbar";
 import styled from "styled-components";
 import * as con from "./constant";
 import axios from "axios";
+import {
+  schema_validate_input,
+  schema_validate_form,
+} from "./schema_validation";
 
 const Styled_Label = styled.label`
   border: 1px solid black;
@@ -13,28 +17,42 @@ const Validation_Text = styled.p`
   background-color: gray;
 `;
 export default function Form(props) {
-  const [stateForm, set_stateForm] = useState(con.initial_form_state);
+  const [stateFormData, set_stateForm] = useState(con.initial_form_state);
+  const [stateValidationText, set_stateValidationText] = useState(
+    con.initial_validationText_state
+  );
+  const [stateFormValidation, set_stateFormValidation] = useState(false);
 
   const cb_onChange = (event) => {
-    // console.log(event);
-    // console.log("event.target.name = ", event.target.name);
-    // console.log("event.target.value = ", event.target.value);
-    // console.log("event.target.type = ", event.target.type);
     const { name, type, value, checked } = event.target;
     const valueToUse = type === "checkbox" ? checked : value;
-    set_stateForm({ ...stateForm, [name]: valueToUse });
+    set_stateForm({ ...stateFormData, [name]: valueToUse });
+
+    if (name === "name" || name === "size") {
+      //validate input
+      schema_validate_input(
+        name,
+        value,
+        stateValidationText,
+        set_stateValidationText
+      );
+    }
   };
 
   const cb_onSubmit = (event) => {
     event.preventDefault();
 
-    axios.post(con.API_URL, stateForm).then((response) => {
+    axios.post(con.API_URL, stateFormData).then((response) => {
       console.log("form.js - response = ", response);
     });
 
     //reset stateForm to default
     set_stateForm(con.initial_form_state);
   };
+
+  useEffect(() => {
+    schema_validate_form(stateFormData, set_stateFormValidation);
+  }, [stateFormData]);
 
   return (
     <>
@@ -47,10 +65,10 @@ export default function Form(props) {
             name="name"
             type="text"
             onChange={cb_onChange}
-            value={stateForm.name}
+            value={stateFormData.name}
           />
         </Styled_Label>
-        <Validation_Text>(validation text)</Validation_Text>
+        <Validation_Text>{stateValidationText.name}</Validation_Text>
         {/* ------------------------------------------ */}
         <Styled_Label>
           {" "}
@@ -59,7 +77,7 @@ export default function Form(props) {
             id="size-dropdown"
             name="size"
             onChange={cb_onChange}
-            value={stateForm.size}
+            value={stateFormData.size}
           >
             <option value="">(please select a size)</option>
             <option value="small">Small</option>
@@ -67,19 +85,19 @@ export default function Form(props) {
             <option value="large">Large</option>
           </select>
         </Styled_Label>
-        <Validation_Text>(validation text)</Validation_Text>
+        <Validation_Text>{stateValidationText.size}</Validation_Text>
         {/* ------------------------------------------ */}
+
         <Styled_Label>
           <b>Cheese</b>
           <input
             type="checkbox"
             name="topping_cheese"
             onChange={cb_onChange}
-            value={stateForm.topping_cheese}
-            // checked={stateForm.topping_cheese}
+            value={stateFormData.topping_cheese}
           />
         </Styled_Label>
-        <Validation_Text>(validation text)</Validation_Text>
+
         {/* ------------------------------------------ */}
         <Styled_Label>
           <b>Pie</b>
@@ -87,11 +105,10 @@ export default function Form(props) {
             type="checkbox"
             name="topping_pie"
             onChange={cb_onChange}
-            value={stateForm.topping_pie}
-            // checked={stateForm.topping_pie ? true : null}
+            value={stateFormData.topping_pie}
           />
         </Styled_Label>
-        <Validation_Text>(validation text)</Validation_Text>
+
         {/* ------------------------------------------ */}
         <Styled_Label>
           <b>Vegetable</b>
@@ -99,24 +116,24 @@ export default function Form(props) {
             type="checkbox"
             name="topping_vegetable"
             onChange={cb_onChange}
-            value={stateForm.topping_vegetable}
-            // checked={stateForm.topping_vegetable ? true : false}
+            value={stateFormData.topping_vegetable}
           />
         </Styled_Label>
-        <Validation_Text>(validation text)</Validation_Text>
+
         {/* ------------------------------------------ */}
+
         <Styled_Label>
           <b>Chili</b>
           <input
             type="checkbox"
             name="topping_chili"
             onChange={cb_onChange}
-            value={stateForm.topping_chili}
-            // checked={stateForm.topping_chili ? true : false}
+            value={stateFormData.topping_chili}
           />
         </Styled_Label>
-        <Validation_Text>(validation text)</Validation_Text>
+
         {/* ------------------------------------------ */}
+
         <Styled_Label>
           <b>Special Instruction : </b>{" "}
           <input
@@ -124,12 +141,16 @@ export default function Form(props) {
             name="special_instruction"
             type="text"
             onChange={cb_onChange}
-            value={stateForm.special_instruction}
+            value={stateFormData.special_instruction}
           />
         </Styled_Label>
-        <Validation_Text>(validation text)</Validation_Text>
+
         {/* ------------------------------------------ */}
-        <button name="submit_button" id="order-button">
+        <button
+          name="submit_button"
+          id="order-button"
+          disabled={!stateFormValidation}
+        >
           Submit
         </button>
       </form>

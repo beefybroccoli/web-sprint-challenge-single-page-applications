@@ -8,4 +8,9 @@ export const initial_form_state = {
   special_instruction: "",
 };
 
+export const initial_validationText_state = {
+  name: "",
+  size: "",
+};
+
 export const API_URL = "https://reqres.in/api/orders";
