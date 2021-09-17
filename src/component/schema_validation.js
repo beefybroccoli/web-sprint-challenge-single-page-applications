@@ -14,32 +14,32 @@ export const formSchema = yup.object().shape({
 });
 
 export const schema_validate_input = (
-  input_name,
-  input_value,
-  input_stateValidation,
-  input_set_stateValidation
+  name,
+  value,
+  stateValidation,
+  set_stateValidation
 ) => {
   yup
-    .reach(formSchema, input_name)
-    .validate(input_value)
+    .reach(formSchema, name)
+    .validate(value)
     .then(() => {
       //return validation success
-      input_set_stateValidation({ ...input_stateValidation, [input_name]: "" });
+      set_stateValidation({ ...stateValidation, [name]: "" });
     })
     .catch((err) => {
       //return validation failure
-      input_set_stateValidation({
-        ...input_stateValidation,
-        [input_name]: err.errors[0],
+      set_stateValidation({
+        ...stateValidation,
+        [name]: err.errors[0],
       });
     });
 };
 
 export const schema_validate_form = (
-  input_stateFormData,
-  input_set_stateFormValidation
+  stateFormData,
+  set_stateFormValidation
 ) => {
-  formSchema.isValid(input_stateFormData).then((valid) => {
-    input_set_stateFormValidation(valid);
+  formSchema.isValid(stateFormData).then((valid) => {
+    set_stateFormValidation(valid);
   });
 };
