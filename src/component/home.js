@@ -33,22 +33,14 @@ const Header_DIV = styled.div`
 export default function Home(props) {
   return (
     <div>
-      <div>
-        <header>
-          <Header_DIV>
-            <Title_H2>LAMBDA EATS</Title_H2>
-            <NavigationBar />
-          </Header_DIV>
-        </header>
+      <Img_Div>
+        <Link_Div>
+          <NavLink to="/pizza" id="order-pizza">
+            Pizza?
+          </NavLink>
+        </Link_Div>
+      </Img_Div>
 
-        <Img_Div>
-          <Link_Div>
-            <NavLink to="/pizza" id="order-pizza">
-              Pizza?
-            </NavLink>
-          </Link_Div>
-        </Img_Div>
-      </div>
       <br />
       <ListOfSlide input_object={con.slides} />
     </div>
