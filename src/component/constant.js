@@ -14,3 +14,48 @@ export const initial_validationText_state = {
 };
 
 export const API_URL = "https://reqres.in/api/orders";
+
+export const slides = [
+  {
+    name: "McDonald's",
+    price: 10,
+    description: "American Fast Food",
+    time: "20-30",
+    delivery_fee: "4.99",
+  },
+  {
+    name: "McDonald's",
+    price: 10,
+    description: "American Fast Food",
+    time: "20-30",
+    delivery_fee: "4.99",
+  },
+  {
+    name: "McDonald's",
+    price: 10,
+    description: "American Fast Food",
+    time: "20-30",
+    delivery_fee: "4.99",
+  },
+  {
+    name: "McDonald's",
+    price: 10,
+    description: "American Fast Food",
+    time: "20-30",
+    delivery_fee: "4.99",
+  },
+  {
+    name: "McDonald's",
+    price: 10,
+    description: "American Fast Food",
+    time: "20-30",
+    delivery_fee: "4.99",
+  },
+  {
+    name: "McDonald's",
+    price: 10,
+    description: "American Fast Food",
+    time: "20-30",
+    delivery_fee: "4.99",
+  },
+];
